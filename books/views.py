@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect, reverse
+from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from .models import Book, Author2
 from .forms import BookForm, AuthorForm
 # Create your views here.
@@ -55,4 +55,31 @@ def create_author(request):
         create_author_form = AuthorForm()
         return render(request, 'books/create_author.template.html', {
             'form': create_author_form
+        })
+
+
+def update_book(request, book_id):
+    # 1. retrieve the book which we are editing, 
+    # assign it to book_being_updated
+    book_being_updated = get_object_or_404(Book, pk=book_id)
+
+    # 2. if the update form is submitted
+    if request.method == "POST":
+        
+        # create the form and fill in user's data (and assign 
+        # it to book_form). instance = book_being_updated:
+        # specifies this instance is to update an existing model 
+        book_form = BookForm(request.POST, instance=book_being_updated)
+        if book_form.is_valid():
+            book_form.save()
+            return redirect(reverse(index))
+        else:
+            return render(request, 'books/update.template.html', {
+                "form": book_form
+            })
+    else:
+        # if method != POST, create a form with the book details filled in
+        book_form = BookForm(instance=book_being_updated)
+        return render(request, 'books/update_book.template.html', {
+            "form": book_form
         })
