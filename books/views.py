@@ -59,16 +59,16 @@ def create_author(request):
 
 
 def update_book(request, book_id):
-    # 1. retrieve the book which we are editing, 
+    # 1. retrieve the book which we are editing,
     # assign it to book_being_updated
     book_being_updated = get_object_or_404(Book, pk=book_id)
 
     # 2. if the update form is submitted
     if request.method == "POST":
-        
-        # create the form and fill in user's data (and assign 
+
+        # create the form and fill in user's data (and assign
         # it to book_form). instance = book_being_updated:
-        # specifies this instance is to update an existing model 
+        # specifies this instance is to update an existing model
         book_form = BookForm(request.POST, instance=book_being_updated)
         if book_form.is_valid():
             book_form.save()
@@ -101,7 +101,7 @@ def edit_author(request, author_id):
                 "form": author_form,
                 # 'author': author_to_edit
             })
-    else: 
+    else:
         author_form = AuthorForm(instance=author_to_edit)
         return render(request, 'books/edit_author.template.html', {
             "form": author_form,

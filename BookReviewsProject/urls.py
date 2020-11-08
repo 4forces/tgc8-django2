@@ -23,10 +23,12 @@ urlpatterns = [
     path('books/', books.views.index),
     path('reviews/', reviews.views.index),
     path('authors/', books.views.authors),
-    path('books/create', books.views.create_book),
-    path('authors/create', books.views.create_author),
-    path('update_books/<book_id>', books.views.update_book, name = 'update_book_route'),
-    path('edit_authors/<author_id>', books.views.edit_author, name = 'edit_author_route')
+    path('create_books/', books.views.create_book),
+    path('create_authors/', books.views.create_author),
+    path('update_books/<book_id>', books.views.update_book,
+         name='update_book_route'),
+    path('edit_authors/<author_id>',
+         books.views.edit_author, name='edit_author_route')
 
 
 ]
