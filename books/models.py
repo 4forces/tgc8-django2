@@ -25,9 +25,10 @@ class Book(models.Model):
 class Author(models.Model):
     first_name = models.CharField(blank=False, max_length=255)
     last_name = models.CharField(blank=False, max_length=255)
-    date_of_birth = models.DateField(blank=False)
+    date_of_birth = models.DateTimeField(blank=False)
+    dob = models.DateField(blank=False)
+
 
 
 def __str__(self):
-        return self.first_name
-        #  + " " + self.last_name
+        return self.first_name + " " + self.last_name
