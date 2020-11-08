@@ -29,6 +29,15 @@ class Author(models.Model):
     dob = models.DateField(blank=False)
 
 
+def __str__(self):
+        return self.first_name + " " + self.last_name
+
+
+class Author2(models.Model):
+    first_name = models.CharField(blank=False, max_length=255)
+    last_name = models.CharField(blank=False, max_length=255)
+    dob = models.DateField(blank=False)
+
 
 def __str__(self):
         return self.first_name + " " + self.last_name
