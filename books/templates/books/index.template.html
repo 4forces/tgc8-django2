@@ -14,10 +14,10 @@
             Here you can see all the books that we have.
         </p>
         <ul>
-            {%for book in books %}
+            {%for b in books %}
             <li>
-                {{book.title}} 
-                <a href="{% url 'update_book_route' book_id=book.id %}">Edit</a>
+                {{b.title}} 
+                <a href="{% url 'update_book_route' book_id=b.id %}">Edit</a>
             </li>
             {%endfor%}
         </ul>

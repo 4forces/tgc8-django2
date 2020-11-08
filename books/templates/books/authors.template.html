@@ -15,7 +15,9 @@
         </p>
         <ul>
             {%for a in authors %}
-            <li>{{a.first_name}} {{a.last_name}}</li>
+            <li>{{a.first_name}} {{a.last_name}}
+            <a href="{% url 'edit_author_route' author_id=a.id %}">Edit</a>
+            </li>
             {%endfor%}
         </ul>
 

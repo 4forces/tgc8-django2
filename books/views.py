@@ -75,11 +75,34 @@ def update_book(request, book_id):
             return redirect(reverse(index))
         else:
             return render(request, 'books/update.template.html', {
-                "form": book_form
+                "form": book_form,
+                # 'book': book_being_updated
             })
     else:
         # if method != POST, create a form with the book details filled in
         book_form = BookForm(instance=book_being_updated)
         return render(request, 'books/update_book.template.html', {
-            "form": book_form
+            "form": book_form,
+            # 'book': book_being_updated
+        })
+
+
+def edit_author(request, author_id):
+    author_to_edit = get_object_or_404(Author2, pk=author_id)
+
+    if request.method == "POST":
+        author_form = AuthorForm(request.POST, instance=author_to_edit)
+        if author_form.is_valid():
+            author_form.save()
+            return redirect(reverse(authors))
+        else:
+            # author_form = AuthorForm(instance=author_to_edit)
+            return render(request, 'books/edit_author.template.html', {
+                "form": author_form,
+                # 'author': author_to_edit
+            })
+    else: 
+        author_form = AuthorForm(instance=author_to_edit)
+        return render(request, 'books/edit_author.template.html', {
+            "form": author_form,
         })
