@@ -24,4 +24,5 @@ urlpatterns = [
     path('reviews/', reviews.views.index),
     path('authors/', books.views.authors),
     path('books/create', books.views.create_book),
+    path('authors/create', books.views.create_author),
 ]

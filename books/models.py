@@ -4,6 +4,7 @@ from django.db import models
 
 # we want to have a Book table inside our database
 
+
 class Book(models.Model):
     # what are the fields (aka attributes) of this table
 
@@ -19,7 +20,7 @@ class Book(models.Model):
  # toString function -- it allows us to state the string representation
     # of a class
     def __str__(self):
-        return self.title 
+        return self.title
 
 
 class Author(models.Model):
@@ -30,7 +31,7 @@ class Author(models.Model):
 
 
 def __str__(self):
-        return self.first_name + " " + self.last_name
+    return self.first_name + " " + self.last_name
 
 
 class Author2(models.Model):
@@ -40,4 +41,4 @@ class Author2(models.Model):
 
 
 def __str__(self):
-        return self.first_name + " " + self.last_name
+    return self.first_name + " " + self.last_name
