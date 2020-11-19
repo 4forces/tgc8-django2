@@ -1,3 +1,53 @@
+## Install new app
+`django-admin startapp books`
+
+## 1. Create a view function
+
+In `views.py`: create the app: e.g "Books app"
+```python
+from django.shortcuts import render, HttpResponse
+# we import in HttpResponse so that we can use it as the return
+
+# Create your views here.
+def index(request):
+    return HttpResponse("Books app")
+```
+
+## 2. MAP URL TO THE VIEW FUNCTION
+In `urls.py`, add the line `path('books/', books.views.index)`
+```python
+from django.urls import path
+import books.views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('books/', books.views.index)
+]
+```
+
+## 3. Create the html template
+- In `templates` folder, create a folder `books`
+- In this folder, create `index.template.html`
+
+## 4. Change the view function to render the template
+```python
+def index(request):
+    return render(request, 'books/index.template.html')
+```
+
+## Start app
+- To start app: In terminal type `python3 manage.py runserver 8080`
+
+## Migrations 
+```
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+
+
+
+---
+
 <img src="https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png" style="margin: 0;">
 
 Welcome 4forces,
