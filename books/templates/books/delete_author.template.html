@@ -7,12 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Delete author {{author.first_name}{{author.last_name}}}</h1>
+    <h1>Delete author {{author.first_name}} {{author.last_name}}</h1>
     <p>Are you sure?</p>
     <form method="POST">
         {% csrf_token %}
         <input type="submit" value="Yes"/>
-        <a href="{% url 'author' %}">No</a>
+        <a href="{% url 'authors_route' %}">No</a>
     </form>
 </body>
 </html>

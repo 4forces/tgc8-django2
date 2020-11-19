@@ -112,11 +112,17 @@ def edit_author(request, author_id):
             "form": author_form,
         })
 
+
 # delete author
 def delete_author(request, author_id):
+    # this part done first
     author_to_delete = get_object_or_404(Author2, pk=author_id)
-    return render(request, 'books/delete_author.template.html', {
-        "author": author_to_delete
-    })
-
-
+    # this part done later
+    if request.method == 'POST':
+        # use delete() method to remove from database
+        author_to_delete.delete()
+        return redirect(authors)
+    else:
+        return render(request, 'books/delete_author.template.html', {
+            "author": author_to_delete
+        })
