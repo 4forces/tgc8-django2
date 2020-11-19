@@ -20,7 +20,7 @@ import reviews.views
 
 urlpatterns = [
     path('home/', books.views.home,
-         name='home'),
+         name='home_route'),
     path('admin/', admin.site.urls),
     path('books/', books.views.index,
          name='books_route'),
