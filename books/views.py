@@ -4,6 +4,11 @@ from .forms import BookForm, AuthorForm
 # Create your views here.
 
 
+def home(request):
+    # passing data as dict to render() function
+    return render(request, 'books/home.template.html')
+
+
 def index(request):
     books = Book.objects.all()
     # passing data as dict to render() function
