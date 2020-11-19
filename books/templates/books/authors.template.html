@@ -16,10 +16,11 @@
         <ul>
             {%for a in authors %}
             <li>{{a.first_name}} {{a.last_name}}
-            <a href="{% url 'edit_author_route' author_id=a.id %}">Edit</a>
+            <a href="{% url 'edit_authors_route' author_id=a.id %}">Edit</a>
             </li>
             {%endfor%}
         </ul>
-
+        <h2>Create Authors</h2>
+        <a href="{% url 'create_authors_route' %}">Click here</a>
     </body>
 </html>

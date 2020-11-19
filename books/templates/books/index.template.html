@@ -17,10 +17,11 @@
             {%for b in books %}
             <li>
                 {{b.title}} 
-                <a href="{% url 'update_book_route' book_id=b.id %}">Edit</a>
+                <a href="{% url 'update_books_route' book_id=b.id %}">Edit</a>
             </li>
             {%endfor%}
         </ul>
-
+        <h2>Create Books</h2>
+        <a href="{% url 'create_books_route' %}">Click here</a>
     </body>
 </html>
