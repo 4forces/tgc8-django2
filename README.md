@@ -1,4 +1,4 @@
-## Install new app
+## 0. Install new app
 `django-admin startapp books`
 
 ## 1. Create a view function
@@ -35,61 +35,77 @@ def index(request):
     return render(request, 'books/index.template.html')
 ```
 
-## Start app
+## 5. Start app
 - To start app: In terminal type `python3 manage.py runserver 8080`
 
-## Migrations 
+## 6. Make Migrations 
 ```
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
+## 7. Creating new classes
+
+1. In `models.py`, create the class (in this case class = `Genre`):
+```python
+class Genre(models.Model):
+    title = models.CharField(blank=False, max_length=255)
+
+    def __str__(self):
+        return self.title
+```
+
+2. Register the model in `admin.py`:
+```python
+# import Genre
+from django.contrib import admin
+from .models import Book, Genre
+
+# Register your models here
+# register (Genre)
+admin.site.register(Book)
+admin.site.register(Genre)
+```
+
+3. Define this new class relationship in the Book model in `models.py`
+```python
+class Book(models.Model):
+    title = models.CharField(blank=False, max_length=255)
+    ISBN = models.CharField(blank=False, max_length=255)
+    desc = models.TextField(blank=False)
+    # Add this line for Genre class:
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+```
+
+4. Make migrations (results in error)
+- Note that if there are already existing values, user will be prompted to fix issue
+of addition of 'non-nullable field'. (Ref. Page 23 of Lecturer's notes)
+
+5. After Step 4, we need to go to `models.py` and comment out the `genre= ` line or the server will crash.
+```python
+class Book(models.Model):
+    title = models.CharField(blank=False, max_length=255)
+    ISBN = models.CharField(blank=False, max_length=255)
+    desc = models.TextField(blank=False)
+    # Add this line for Genre class:
+    # genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+```
+   - Make migrations again to update the server after commenting out the `genre= ` line
+
+5. Allow user to select 'Genre' for Book by adding `'genre'` in the `class BookForm()` fields:
+```python
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        # add 'genre'
+        fields = ('title', 'desc', 'ISBN', 'genre')
+```
 
 
 ---
-
-<img src="https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png" style="margin: 0;">
-
-Welcome 4forces,
-
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
-
-## Gitpod Reminders
-
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
-
-`python3 -m http.server`
-
-A blue button should appear to click: *Make Public*,
-
-Another blue button should appear to click: *Open Browser*.
-
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
-
-A blue button should appear to click: *Make Public*,
-
-Another blue button should appear to click: *Open Browser*.
-
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
-
-## Updates Since The Instructional Video
-
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
-
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
-
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
---------
-
-Happy coding!
