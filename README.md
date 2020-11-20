@@ -83,7 +83,7 @@ class Book(models.Model):
 ```
 
 4. Make migrations (may results in error)
-- Steps [here](##6.-make-migrations)
+- Steps [here](#6-make-migrations--lecturers-notes-steps-60--72)
 - Note that if there are already existing values, user will be prompted to fix issue
 of addition of 'non-nullable field'. (Ref. Page 23 of Lecturer's Notes). 
 - If queried, select option '1' and type 'None' (not a solve-all solution, 
@@ -154,7 +154,7 @@ admin.site.register(Tag)
 - **Remember to import the model at the top of the file**
 
 4. Make migrations (M:M does not cause same problem as 1:M/M:1)
-- Step [here](##6.-make-migrations)
+- Step [here](#6-make-migrations--lecturers-notes-steps-60--72)
 
 5. Allow user to select 'Tag' for Book by adding `'tag'` in the 
 `class BookForm()` fields in `forms.py`:
