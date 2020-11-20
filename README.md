@@ -44,15 +44,15 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-## 7. Creating new classes
+## 7. Creating new classes (for e.g. 'Genre' or 'Category' for book)
 
 1. In `models.py`, create the class (in this case class = `Genre`):
 ```python
 class Genre(models.Model):
-    title = models.CharField(blank=False, max_length=255)
+    genre = models.CharField(blank=False, max_length=255)
 
     def __str__(self):
-        return self.title
+        return self.genre
 ```
 
 2. Register the model in `admin.py`:
@@ -80,9 +80,11 @@ class Book(models.Model):
         return self.title
 ```
 
-4. Make migrations (results in error)
+4. Make migrations (may results in error)
 - Note that if there are already existing values, user will be prompted to fix issue
-of addition of 'non-nullable field'. (Ref. Page 23 of Lecturer's notes)
+of addition of 'non-nullable field'. (Ref. Page 23 of Lecturer's notes). 
+- If queried, select option '1' and type 'None' (not a solve-all solution, 
+need to be aware of our model relationships when selecting option)
 
 5. After Step 4, we need to go to `models.py` and comment out the `genre= ` line or the server will crash.
 ```python
