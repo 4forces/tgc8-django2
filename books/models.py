@@ -20,7 +20,7 @@ class Book(models.Model):
     desc = models.TextField(blank=False)
     # toString function -- it allows us to state the
     # string representation of a class
-    # genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
