@@ -26,7 +26,7 @@ class Book(models.Model):
     # toString function -- it allows us to state the
     # string representation of a class
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    Category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 
     def __str__(self):
