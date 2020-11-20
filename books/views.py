@@ -135,6 +135,7 @@ def delete_book(request, book_id):
     if request.method == 'POST':
         # use delete() method to remove from database
         book_to_delete.delete()
+        # (index) refers to display_books page
         return redirect(index)
     else:
         return render(request, 'books/delete_book.template.html', {
