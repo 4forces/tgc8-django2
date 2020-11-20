@@ -1,7 +1,7 @@
-## 0. Install new app
+## 0. Install new app | Notes: Step 2.1
 `django-admin startapp books`
 
-## 1. Create a view function
+## 1. Create a view function | Notes: Steps 2.3
 
 In `views.py`: create the app: e.g "Books app"
 ```python
@@ -13,7 +13,7 @@ def index(request):
     return HttpResponse("Books app")
 ```
 
-## 2. MAP URL TO THE VIEW FUNCTION
+## 2. MAP URL TO THE VIEW FUNCTION | Notes: Steps 2.4
 In `urls.py`, add the line `path('books/', books.views.index)`
 ```python
 from django.urls import path
@@ -25,26 +25,26 @@ urlpatterns = [
 ]
 ```
 
-## 3. Create the html template
+## 3. Create the html template | Notes: Steps 4.1 - 4.3
 - In `templates` folder, create a folder `books`
 - In this folder, create `index.template.html`
 
-## 4. Change the view function to render the template
+## 4. Change the view function to render the template | Notes: Steps 4.4
 ```python
 def index(request):
     return render(request, 'books/index.template.html')
 ```
 
-## 5. Start app
+## 5. Start app | Notes: Steps 1.4 Test Run
 - To start app: In terminal type `python3 manage.py runserver 8080`
 
-## 6. Make Migrations 
+## 6. Make Migrations | Notes: Steps 6.0 & 7.2
 ```
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-## 7. Creating new classes for 'One to Many' (for e.g. 'Genre' or 'Category' for book)
+## 7. Creating new classes for 'One to Many' (for e.g. 'Genre' or 'Category' for book) | Notes: Step 18
 
 1. In `models.py`, create the class (in this case class = `Genre`):
 ```python
@@ -85,7 +85,7 @@ class Book(models.Model):
 4. Make migrations (may results in error)
 - Steps [here](##6.-make-migrations)
 - Note that if there are already existing values, user will be prompted to fix issue
-of addition of 'non-nullable field'. (Ref. Page 23 of Lecturer's notes). 
+of addition of 'non-nullable field'. (Ref. Page 23 of Lecturer's Notes). 
 - If queried, select option '1' and type 'None' (not a solve-all solution, 
 need to be aware of our model relationships when selecting option)
 
@@ -113,7 +113,7 @@ class BookForm(forms.ModelForm):
         fields = ('title', 'desc', 'ISBN', 'genre')
 ```
 
-## 8. Creating new classes for 'Many to Many' (for e.g. 'tags' or 'authors' for 'book')
+## 8. Creating new classes for 'Many to Many' (for e.g. 'tags' or 'authors' for 'book') | Lecturer's Notes: Step 20
 
 1. In `models.py`, create the class (in this case class = `Tag`):
 ```python
