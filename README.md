@@ -66,6 +66,7 @@ from .models import Book, Genre
 admin.site.register(Book)
 admin.site.register(Genre)
 ```
+- **Remember to import the model at the top of the file**
 
 3. Define this new class relationship in the Book model in `models.py`
 ```python
@@ -73,7 +74,8 @@ class Book(models.Model):
     title = models.CharField(blank=False, max_length=255)
     ISBN = models.CharField(blank=False, max_length=255)
     desc = models.TextField(blank=False)
-    # Add this line for Genre class:
+    # Add this line for Genre class
+    # also has models.DELETE, models.RESTRICT(<function>)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -100,7 +102,7 @@ class Book(models.Model):
 ```
    - Make migrations again to update the server after commenting out the `genre= ` line
 
-5. Allow user to select 'Genre' for Book by adding `'genre'` in the `class BookForm()` fields:
+5. Allow user to select 'Genre' for Book by adding `'genre'` in the `class BookForm()` fields in `forms.py`:
 ```python
 class BookForm(forms.ModelForm):
     class Meta:
