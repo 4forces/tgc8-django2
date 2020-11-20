@@ -115,9 +115,9 @@ def edit_author(request, author_id):
 
 # delete author
 def delete_author(request, author_id):
-    # this part done first
+    # this part done when first defining in views.py
     author_to_delete = get_object_or_404(Author2, pk=author_id)
-    # this part done later
+    # this part done later after testing form works
     if request.method == 'POST':
         # use delete() method to remove from database
         author_to_delete.delete()
@@ -125,4 +125,18 @@ def delete_author(request, author_id):
     else:
         return render(request, 'books/delete_author.template.html', {
             "author": author_to_delete
+        })
+
+# delete book
+def delete_book(request, book_id):
+    # this part done when first defining in views.py
+    book_to_delete = get_object_or_404(Book, pk=book_id)
+    # this part done later after testing form works
+    if request.method == 'POST':
+        # use delete() method to remove from database
+        book_to_delete.delete()
+        return redirect(index)
+    else:
+        return render(request, 'books/delete_book.template.html', {
+            "book": book_to_delete
         })
