@@ -1,7 +1,7 @@
-## 0. Install new app | Notes: Step 2.1
+## 0. Install new app | Lecturer's Notes: Step 2.1
 `django-admin startapp books`
 
-## 1. Create a view function | Notes: Steps 2.3
+## 1. Create a view function | Lecturer's Notes: Steps 2.3
 
 In `views.py`: create the app: e.g "Books app"
 ```python
@@ -13,7 +13,7 @@ def index(request):
     return HttpResponse("Books app")
 ```
 
-## 2. MAP URL TO THE VIEW FUNCTION | Notes: Steps 2.4
+## 2. MAP URL TO THE VIEW FUNCTION | Lecturer's Notes: Steps 2.4
 In `urls.py`, add the line `path('books/', books.views.index)`
 ```python
 from django.urls import path
@@ -25,26 +25,26 @@ urlpatterns = [
 ]
 ```
 
-## 3. Create the html template | Notes: Steps 4.1 - 4.3
+## 3. Create the html template | Lecturer's Notes: Steps 4.1 - 4.3
 - In `templates` folder, create a folder `books`
 - In this folder, create `index.template.html`
 
-## 4. Change the view function to render the template | Notes: Steps 4.4
+## 4. Change the view function to render the template | Lecturer's Notes: Steps 4.4
 ```python
 def index(request):
     return render(request, 'books/index.template.html')
 ```
 
-## 5. Start app | Notes: Steps 1.4 Test Run
+## 5. Start app | Lecturer's Notes: Steps 1.4 Test Run
 - To start app: In terminal type `python3 manage.py runserver 8080`
 
-## 6. Make Migrations | Notes: Steps 6.0 & 7.2
+## 6. Make Migrations | Lecturer's Notes: Steps 6.0 & 7.2
 ```
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-## 7. Creating new classes for 'One to Many' (for e.g. 'Genre' or 'Category' for book) | Notes: Step 18
+## 7. Creating new classes for 'One to Many' (for e.g. 'Genre' or 'Category' for book) | Lecturer's Notes: Step 18
 
 1. In `models.py`, create the class (in this case class = `Genre`):
 ```python
