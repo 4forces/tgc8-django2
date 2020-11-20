@@ -8,6 +8,11 @@ class Genre(models.Model):
     def __str__(self):
         return self.genre
 
+class Category(models.Model):
+    category = models.CharField(blank=False, max_length=255)
+
+    def __str__(self):
+        return self.category
 
 # we want to have a Book table inside our database
 class Book(models.Model):
