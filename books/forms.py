@@ -8,7 +8,7 @@ class BookForm(forms.ModelForm):
     class Meta:
         # define model as 'Book'
         model = Book
-        fields = ('title', 'desc', 'ISBN', 'genre', 'category')
+        fields = ('title', 'desc', 'ISBN', 'genre', 'category', 'tag')
 
 
 class AuthorForm(forms.ModelForm):

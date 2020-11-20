@@ -14,6 +14,13 @@ class Category(models.Model):
     def __str__(self):
         return self.category
 
+
+class Tag(models.Model):
+    tag = models.CharField(blank=False, max_length=255)
+
+    def __str__(self):
+        return self.tag
+
 # we want to have a Book table inside our database
 class Book(models.Model):
     # what are the fields (aka attributes) of this table
@@ -27,6 +34,7 @@ class Book(models.Model):
     # string representation of a class
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    tag = models.ManyToManyField(Tag)
 
 
     def __str__(self):

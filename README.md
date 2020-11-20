@@ -44,7 +44,7 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-## 7. Creating new classes (for e.g. 'Genre' or 'Category' for book)
+## 7. Creating new classes for 'One to Many' (for e.g. 'Genre' or 'Category' for book)
 
 1. In `models.py`, create the class (in this case class = `Genre`):
 ```python
@@ -83,6 +83,7 @@ class Book(models.Model):
 ```
 
 4. Make migrations (may results in error)
+- Steps [here](##6.-make-migrations)
 - Note that if there are already existing values, user will be prompted to fix issue
 of addition of 'non-nullable field'. (Ref. Page 23 of Lecturer's notes). 
 - If queried, select option '1' and type 'None' (not a solve-all solution, 
@@ -102,7 +103,8 @@ class Book(models.Model):
 ```
    - Make migrations again to update the server after commenting out the `genre= ` line
 
-5. Allow user to select 'Genre' for Book by adding `'genre'` in the `class BookForm()` fields in `forms.py`:
+5. Allow user to select 'Genre' for Book by adding `'genre'` in the 
+`class BookForm()` fields in `forms.py`:
 ```python
 class BookForm(forms.ModelForm):
     class Meta:
@@ -111,5 +113,55 @@ class BookForm(forms.ModelForm):
         fields = ('title', 'desc', 'ISBN', 'genre')
 ```
 
+## 8. Creating new classes for 'Many to Many' (for e.g. 'tags' or 'authors' for 'book')
 
+1. In `models.py`, create the class (in this case class = `Tag`):
+```python
+class Tag(models.Model):
+    tag = models.CharField(blank=False, max_length=255)
+
+    def __str__(self):
+        return self.tag
+```
+
+2. Define/Add this new `Tag` class relationship in the Book model in `models.py`
+```python
+class Book(models.Model):
+    title = models.CharField(blank=False, max_length=255)
+    ISBN = models.CharField(blank=False, max_length=255)
+    desc = models.TextField(blank=False)
+    # Add this line for Genre class
+    # also has models.DELETE, models.RESTRICT(<function>)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    tag = models.ManyToManyField(Tag)
+
+    def __str__(self):
+        return self.title
+```
+
+3. Register the `Tag` model in `admin.py`:
+```python
+# import Genre
+from django.contrib import admin
+from .models import Book, Genre, Tag
+
+# Register your models here
+# register (Genre)
+admin.site.register(Book)
+admin.site.register(Genre)
+admin.site.register(Tag)
+```
+- **Remember to import the model at the top of the file**
+
+4. Make migrations (M:M does not cause same problem as 1:M/M:1)
+- Step [here](##6.-make-migrations)
+
+5. Allow user to select 'Tag' for Book by adding `'tag'` in the 
+`class BookForm()` fields in `forms.py`:
+```python
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ('title', 'desc', 'ISBN', 'genre', 'tag')
+```
 ---
