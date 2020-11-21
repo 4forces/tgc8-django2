@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
 
     # my apps
     'books',
@@ -104,6 +109,40 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+# the user have to login with username and email
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
+# all new user must provide an email address
+ACCOUNT_EMAIL_REQUIRED = True
+
+# send an email to user for verification
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# prompt user to enter email twice
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+
+# set username mininimum length
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+
+# LOGIN_URL is where the login page url is at
+LOGIN_URL = '/accounts/login/'
+
+# which URL to go where the user has logged in successfully
+LOGIN_REDIRECT_URL = '/success'
+
+# tell django to send the verification email to the console,
+# so that user(?) can see the verification link
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
