@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
 
 
     # my apps
@@ -159,9 +160,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# to explicitly enable Django to show flash messages
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -170,3 +168,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+# to explicitly enable Django to show flash messages
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+# tell django crispy form to format out form using bootstrap4
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
