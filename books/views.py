@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from .models import Book, Author2
 from .forms import BookForm, AuthorForm
+from django.contrib.auth.decorators import login_required, permission_required
 # Create your views here.
 
 
@@ -24,7 +25,7 @@ def authors(request):
         'authors': authors
     })
 
-
+@login_required
 def create_book(request):
     if request.method == "POST":
         # # checks if 'POST' is working
