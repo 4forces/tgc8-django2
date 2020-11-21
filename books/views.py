@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect, reverse, get_object
 from .models import Book, Author2
 from .forms import BookForm, AuthorForm
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib import messages
 # Create your views here.
 
 
@@ -40,6 +41,8 @@ def create_book(request):
             # save keyed in data to the database
             form.save()
             # eqv. to 'redirect(url_for(index))' in Flask
+            messages.success(request,
+                            f"New book {create_form.cleaned_data['title']} has been created")
             return redirect(reverse(index))
     else:
         # create an instance of the BookForm
