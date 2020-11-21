@@ -10,6 +10,11 @@
     </head>
     <body>
         <h1>Books</h1>
+            {% if request.user.is_authenticated %}
+            <p>Welcome {{request.user}}</p>
+            {%else%}
+            <p>Please <a href="/accounts/login">Login</a></p>
+            {%endif%}
         <p>
             Here you can see all the books that we have.
         </p>
