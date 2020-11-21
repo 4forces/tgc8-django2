@@ -1,21 +1,13 @@
 {% extends 'base.template.html' %}
 {% load static %}
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
-    </head>
-    <body>
+
+{% block content %}
         <h1>Books</h1>
             {% if request.user.is_authenticated %}
             <p>Welcome {{request.user}}</p>
-            {%else%}
+            {% else %}
             <p>Please <a href="/accounts/login">Login</a></p>
-            {%endif%}
+            {% endif %}
         <p>
             Here you can see all the books that we have.
         </p>
@@ -33,5 +25,4 @@
         <h2>Back to Home</h2>
         <p><a href="{% url 'home_route' %}">Click here</a></p>
 
-    </body>
-</html>
+{% endblock %}
