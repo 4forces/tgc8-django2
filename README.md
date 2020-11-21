@@ -103,7 +103,7 @@ class Book(models.Model):
 ```
    - Make migrations again to update the server after commenting out the `genre= ` line
 
-5. Allow user to select 'Genre' for Book by adding `'genre'` in the 
+6. Allow user to select 'Genre' for Book by adding `'genre'` in the 
 `class BookForm()` fields in `forms.py`:
 ```python
 class BookForm(forms.ModelForm):
