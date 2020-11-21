@@ -42,7 +42,7 @@ def create_book(request):
             form.save()
             # eqv. to 'redirect(url_for(index))' in Flask
             messages.success(request,
-                            f"New book {create_form.cleaned_data['title']} has been created")
+                            f"New book {form.cleaned_data['title']} has been created")
             return redirect(reverse(index))
     else:
         # create an instance of the BookForm
