@@ -21,8 +21,8 @@ import reviews.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('reviews/', reviews.views.index,
-         name='reviews_route'),
+    path('home/', books.views.home,
+         name='home_route'),
     path('authors/', books.views.authors,
          name='authors_route'),
     path('authors/create/', books.views.create_author,
@@ -30,5 +30,8 @@ urlpatterns = [
     path('authors/edit/<author_id>', books.views.edit_author,
          name='edit_authors_route'),
     path('authors/delete/<author_id>', books.views.delete_author,
-         name='delete_authors_route')
+         name='delete_authors_route'),
+    path('books/', include('books.urls')),
+    path('reviews/', include('reviews.urls'))
+
 ]
