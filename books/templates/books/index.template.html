@@ -1,6 +1,6 @@
 {% extends 'base.template.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block content %}
         <h1>Books</h1>
             {% if request.user.is_authenticated %}

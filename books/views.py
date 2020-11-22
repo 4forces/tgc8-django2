@@ -16,15 +16,19 @@ def home(request):
 def index(request):
     books = Book.objects.all()
     # passing data as dict to render() function
+    search_form = SearchForm
     return render(request, 'books/index.template.html', {
-        'books': books
+        'books': books,
+        'search_form': search_form
     })
 
 
 def view_book_details(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
+    review_form = ReviewForm()
     return render(request, 'books/book_details.template.html', {
-        'book': book
+        'book': book,
+        'form': review_form
     })
 
 

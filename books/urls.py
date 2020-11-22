@@ -4,6 +4,7 @@ import books.views
 urlpatterns = [
     path('', books.views.index,
          name='books_route'),
+    path('search/', books.views.search),
     path('create', books.views.create_book,
          name='create_books_route'),       
     path('update/<book_id>', books.views.update_book,

@@ -20,5 +20,7 @@ class AuthorForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
-    genre = forms.ModelChoiceField(queryset=Genre.objects.all(), required=False)
-    tag = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(), required =False)
+    genre = forms.ModelChoiceField(
+        queryset=Genre.objects.all(), required=False)
+    tag = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(), required =False)
