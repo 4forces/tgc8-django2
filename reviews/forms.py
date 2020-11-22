@@ -8,4 +8,4 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         # define model as 'Book'
         model = Review
-        fields = ('__all__')
+        fields = ('title', 'book', 'content')
