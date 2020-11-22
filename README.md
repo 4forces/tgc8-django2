@@ -165,3 +165,31 @@ class BookForm(forms.ModelForm):
         fields = ('title', 'desc', 'ISBN', 'genre', 'tag')
 ```
 ---
+# General steps for creating new App in django
+
+## For e.g. for 'reviews' app
+
+1. in `reviews` folder:
+- create `views.py`
+- create `index.template.html`
+- create `create_review.template.html`
+- create `models.py`
+- `make migrations`
+- create `forms.py`
+- create `admin.py`
+- in `views.py`: add flash messages
+
+2. in root `urls.py`
+- add path('reviews/create', reviews.views.create_review),
+
+2. in `books` folder
+- extends `base.template.html` to `create_book.template.html`.
+- add crispy forms
+
+in `settings.py` - DONE
+add 'crispy_forms'
+add 
+```python
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+CRISPY_TEMPLATE_PACK = 'bootstrap4' 
+```
