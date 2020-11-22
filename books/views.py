@@ -6,9 +6,9 @@ from django.contrib import messages
 # Create your views here.
 
 
-def home(request):
-    # passing data as dict to render() function
-    return render(request, 'books/home.template.html')
+# def home(request):
+#     # passing data as dict to render() function
+#     return render(request, 'books/home.template.html')
 
 
 def index(request):
@@ -26,6 +26,7 @@ def authors(request):
         'authors': authors
     })
 
+
 @login_required
 def create_book(request):
     if request.method == "POST":
@@ -42,7 +43,7 @@ def create_book(request):
             form.save()
             # eqv. to 'redirect(url_for(index))' in Flask
             messages.success(request,
-                            f"New book {form.cleaned_data['title']} has been created")
+                             f"New book {form.cleaned_data['title']} has been created")
             return redirect(reverse(index))
     else:
         # create an instance of the BookForm
@@ -132,6 +133,8 @@ def delete_author(request, author_id):
         })
 
 # delete book
+
+
 def delete_book(request, book_id):
     # this part done when first defining in views.py
     book_to_delete = get_object_or_404(Book, pk=book_id)
