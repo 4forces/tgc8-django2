@@ -1,3 +1,11 @@
+## -1. Packages to Install
+```
+pip3 install django
+pip3 install django-allauth
+pip3 install django-crispy-forms
+
+```
+
 ## 0. Install new app | Lecturer's Notes: Step 2.1
 `django-admin startapp books`
 
