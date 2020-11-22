@@ -1,14 +1,11 @@
-from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import reverse, get_object_or_404
 from .models import Book, Author2
 from .forms import BookForm, AuthorForm
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
 # Create your views here.
-
-
-# def home(request):
-#     # passing data as dict to render() function
-#     return render(request, 'books/home.template.html')
 
 
 def index(request):
