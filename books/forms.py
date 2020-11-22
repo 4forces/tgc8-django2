@@ -1,5 +1,5 @@
 from django import forms
-from .models import Book, Author2
+from .models import Book, Author2, Genre, Tag
 
 
 # define new class 'BookForm'
@@ -16,3 +16,9 @@ class AuthorForm(forms.ModelForm):
         # define model as 'AAuthor2'
         model = Author2
         fields = ('first_name', 'last_name', 'dob')
+
+
+class SearchForm(forms.Form):
+    title = forms.CharField(max_length=100, required=False)
+    genre = forms.ModelChoiceField(queryset=Genre.objects.all(), required=False)
+    tag = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(), required =False)

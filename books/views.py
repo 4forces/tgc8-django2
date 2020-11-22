@@ -8,6 +8,10 @@ from django.contrib import messages
 # Create your views here.
 
 
+def home(request):
+    return render(request, 'books/home.template.html')
+
+
 def index(request):
     books = Book.objects.all()
     # passing data as dict to render() function
@@ -40,7 +44,8 @@ def create_book(request):
             form.save()
             # eqv. to 'redirect(url_for(index))' in Flask
             messages.success(request,
-                             f"New book {form.cleaned_data['title']} has been created")
+                             f"New book {form.cleaned_data['title']}"
+                             f" has been created")
             return redirect(reverse(index))
     else:
         # create an instance of the BookForm
