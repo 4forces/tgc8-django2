@@ -3,7 +3,8 @@ import reviews.views
 
 
 urlpatterns = [
-    path('review/', reviews.views.index,
+    path('', reviews.views.index,
          name='reviews_route'),
-    path('review/create', reviews.views.create_review),
+    path('create/<book_id>', reviews.views.create_review,
+        name="create_review_route"),
 ]
