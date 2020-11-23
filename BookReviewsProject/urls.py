@@ -33,5 +33,6 @@ urlpatterns = [
          name='delete_authors_route'),
     path('books/', include('books.urls')),
     path('reviews/', include('reviews.urls'))
+    path('carts/', include('cart.urls'))
 
 ]

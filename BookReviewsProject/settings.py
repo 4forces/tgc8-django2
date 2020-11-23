@@ -45,12 +45,14 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'crispy_forms',
-    'cloudinary',
+
 
     # my apps
     'books',
-    'reviews'
+    'reviews',
+    'crispy_forms',
+    'cloudinary',
+    'cart'
 ]
 
 MIDDLEWARE = [
