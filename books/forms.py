@@ -1,5 +1,6 @@
 from django import forms
 from .models import Book, Author2
+from cloudinary.forms import CloudinaryJsFileField
 
 
 # define new class 'BookForm'
@@ -9,6 +10,7 @@ class BookForm(forms.ModelForm):
         # define model as 'Book'
         model = Book
         fields = ('title', 'desc', 'ISBN', 'genre', 'category', 'tag', 'author', 'owner')
+    cover = CloudinaryJsFileField()
 
 
 class AuthorForm(forms.ModelForm):
