@@ -17,6 +17,7 @@
                 {{b.title}} 
                 <a href="{% url 'update_books_route' book_id=b.id %}">Edit</a>
                 <a href="{% url 'delete_books_route' book_id=b.id %}">Delete</a>
+                <a href="{% url 'add_to_cart' book_id=b.id %}" class="btn btn-primary btn-sm">Add to Cart</a>
             </li>
             {%endfor%}
         </ul>

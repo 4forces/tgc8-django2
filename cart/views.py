@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from books.model import Book
+from django.contrib import messages
+from books.models import Book
 
 # Create your views here.
 
@@ -25,4 +26,4 @@ def add_to_cart(request, book_id):
         cart[book_id]['qty'] += 1
 
     request.session['shopping_cart'] = cart
-    return redirect(reverse('books.views.index'))
+    return redirect(reverse('books_route'))
