@@ -27,3 +27,10 @@ def add_to_cart(request, book_id):
 
     request.session['shopping_cart'] = cart
     return redirect(reverse('books_route'))
+
+
+def view_cart(request):
+    cart = request.session.get('shopping_cart', {})
+    return render(request, 'cart/view_cart.template.html', {
+        'cart': cart
+    })
