@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
-    'cloudinary'
+    'cloudinary',
 
     # my apps
     'books',
@@ -181,5 +181,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CLOUDINARY = {
     'cloud_name':os.environ.get('CLOUDINARY_CLOUD_NAME'),
     'api_key':os.environ.get('CLOUDINARY_API_KEY'),
-    'aip_secret': os.environget('CLOUDINAY_API_SECRET')
+    'aip_secret': os.environ.get('CLOUDINAY_API_SECRET')
 }
