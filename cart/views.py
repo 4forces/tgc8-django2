@@ -34,3 +34,17 @@ def view_cart(request):
     return render(request, 'cart/view_cart.template.html', {
         'cart': cart
     })
+
+
+def remove_from_cart(request, book_id):
+    cart = request.session.get('shopping_cart', {})
+
+    # check if a key in the cart dictionary that matches the book_id
+    if book_id in cart:
+        del cart[book_id]
+
+        # re-save the session
+        request.session['shopping_cart'] = cart
+        messages.success(request, "Item successfully removed from the cart")
+
+    return redirect(reverse('books_route'))

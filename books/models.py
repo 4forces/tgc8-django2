@@ -50,6 +50,7 @@ class Book(models.Model):
     author = models.ManyToManyField(Author2)
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     cover = CloudinaryField()
+    cost = models.IntegerField(blank=False)
 
 
 
