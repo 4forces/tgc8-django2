@@ -5,6 +5,8 @@ import stripe
 from django.conf import settings
 from django.contrib.sites.models import sites
 
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 def checkout(request):
     # set the api keys for stripe to work
@@ -33,7 +35,8 @@ def checkout(request):
         line_items.append(item)
         all_book_ids.append(str(book_model.id))
 
-    current_site = Site.objects
+    current_site = Site.objects.get_current()
+    domain = current_site.domain
 
     # create a payment session (it's for Stripe)
     session = stripe.checkout.Session.create(
@@ -47,3 +50,21 @@ def checkout(request):
         success_url = domain + reverse('checkout_success'),
         cancel_url=domain + reverse("checkout_cancelled")
     )
+
+    return render(request, "checkout/checkout.template.html", {
+        "session_id": session.id,
+        "public_key": settings.STRIPE_PUBLISHABLE_KEY
+    })
+
+
+def checkout_success:
+    return HttpResponse('Payment completed successfully')
+
+
+def checkout_cancelled:
+    return HttpResponse('Check out cancelled')
+
+@csrf_exempt
+def payment_completed(request):
+    print(request.body)
+    return HttpResponse()
