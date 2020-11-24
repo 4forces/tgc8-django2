@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponse
 from django.contrib import messages
 from books.models import Book
 
@@ -17,7 +17,7 @@ def add_to_cart(request, book_id):
         cart[book_id] = {
             'id': book_id,
             'title': book.title,
-            'cost': 99,
+            'cost': "{:.2f}".format(book.cost/1000),
             'qty': 1
         }
     else:
@@ -48,3 +48,15 @@ def remove_from_cart(request, book_id):
         messages.success(request, "Item successfully removed from the cart")
 
     return redirect(reverse('books_route'))
+
+
+def update_quantity(request, book_id):
+    # return HttpResponse("Updating quantity of book")
+    cart = request.sesion.get('shopping_cart', {})
+    # if the book_iud I want to update the quantity is in the shoppoing cart
+    if book_id in cart:
+        cart[book_id]['qty'] = request.POST['qty']
+        request.session['shopping_cart'] = cart
+        messages.success(request, "Quantity has been updated")
+
+    return redirect(reverse('view_cart'))
