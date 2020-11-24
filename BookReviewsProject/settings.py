@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'reviews',
     'crispy_forms',
     'cloudinary',
-    'cart'
+    'cart',
+    'checkout'
 ]
 
 MIDDLEWARE = [
@@ -186,3 +187,8 @@ CLOUDINARY = {
     'api_key':os.environ.get('CLOUDINARY_API_KEY'),
     'api_secret': os.environ.get('CLOUDINARY_API_SECRET'),
 }
+
+
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+
