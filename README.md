@@ -43,6 +43,7 @@ def index(request):
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
+Note: To preview migrations: `python3 manage.py makemigrations –dry-run`
 
 ## 7. Creating new classes for 'One to Many' (for e.g. 'Genre' or 'Category' for book) | Lecturer's Notes: Step 18
 
