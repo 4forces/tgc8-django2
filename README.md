@@ -1,5 +1,6 @@
 ## 0. Install new app | Lecturer's Notes: Step 2.1
-`django-admin startapp books`
+1. install django: `django-admin startapp books`
+2. create superuser:  `python3 manage.py create superuser`
 
 ## 1. Create a view function | Lecturer's Notes: Steps 2.3
 
@@ -43,7 +44,9 @@ def index(request):
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
-Note: To preview migrations: `python3 manage.py makemigrations -–dry-run`
+- Note 1: To preview migrations to be made: `python3 manage.py makemigrations -–dry-run`
+- Note 2: To view all migrated/to be migrated: `python3 manage.py showmigrations`
+- Note 3: To view verbose: `python3 manage.py migrate --plan`
 
 ## 7. Creating new classes for 'One to Many' (for e.g. 'Genre' or 'Category' for book) | Lecturer's Notes: Step 18
 
