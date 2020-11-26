@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse, HttpResponse, get_object_or_404
 from books.models import Book
 
 import stripe
+import json
 
 #import settings so that we can access the public stripe key
 from django.conf import settings
@@ -23,7 +24,7 @@ def checkout(request):
     all_book_ids = []
 
     # go thru each item in the shopping cart
-    for book_id, book in cart.items():
+    for book_id, cart_item in cart.items():
 
         # retrieve the book specified by book_id from our list of books
         book_model = get_object_or_404(Book, pk=book_id)
@@ -36,12 +37,15 @@ def checkout(request):
         item = {
             "name": book_model.title,
             "amount": book_model.cost,
-            "quantity": book['qty'],
+            "quantity": cart_item['qty'],
             "currency": 'usd',
         }
 
         line_items.append(item)
-        all_book_ids.append(str(book_model.id))
+        all_book_ids.append({
+                'book_id': book_model.id,
+                'qty': cart_item['qty']
+            })
 
     current_site = Site.objects.get_current()
     domain = current_site.domain
@@ -52,7 +56,7 @@ def checkout(request):
         line_items=line_items,
         client_reference_id=request.user.id,
         metadata={
-            "all_book_ids": ",".join(all_book_ids)
+            "all_book_ids": json.dumps(all_book_ids)
         },
         mode="payment",
         success_url=domain + reverse('checkout_success'),
@@ -75,7 +79,7 @@ def checkout_cancelled(request):
 # webhook
 @csrf_exempt
 def payment_completed(request):
-    #1. verify that the data is actually sent by stripe
+    # 1. verify that the data is actually sent by stripe
     endpoint_secret = settings.ENDPOINT_SECRET
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
@@ -92,12 +96,15 @@ def payment_completed(request):
         # signature is invalid
         print("Invalid signature")
         return HttpResponse(status=400)
-    
-    #2. process the order
+
+    # 2. process the order
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         handle_payment(session)
 
-    # (request.body) = data stripe sends us 
+    # (request.body) = data stripe sends us
     print(request.body)
     return HttpResponse(status=200)
+
+def handle_payment(session):
+    print(session)
