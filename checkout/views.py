@@ -106,5 +106,6 @@ def payment_completed(request):
     print(request.body)
     return HttpResponse(status=200)
 
+
 def handle_payment(session):
     print(session)
