@@ -28,13 +28,7 @@
         <a class="nav-link" href="{% url 'books_route' %}">Books <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link 2</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'view_cart' %}">Cart {{number_of_items}}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link" href="{% url 'view_cart' %}">Cart ({{number_of_items}})</a>
       </li>
     </ul>
   </div>
