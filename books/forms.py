@@ -9,7 +9,8 @@ class BookForm(forms.ModelForm):
     class Meta:
         # define model as 'Book'
         model = Book
-        fields = ('title', 'desc', 'ISBN', 'genre', 'category', 'tag', 'author', 'owner')
+        fields = ('title', 'desc', 'ISBN', 'genre',
+                  'category', 'tag', 'author', 'owner', 'cost')
     cover = CloudinaryJsFileField()
 
 

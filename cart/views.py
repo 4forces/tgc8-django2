@@ -52,7 +52,7 @@ def remove_from_cart(request, book_id):
 
 def update_quantity(request, book_id):
     # return HttpResponse("Updating quantity of book")
-    cart = request.sesion.get('shopping_cart', {})
+    cart = request.session.get('shopping_cart', {})
     # if the book_iud I want to update the quantity is in the shoppoing cart
     if book_id in cart:
         cart[book_id]['qty'] = request.POST['qty']

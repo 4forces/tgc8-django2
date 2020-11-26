@@ -1,7 +1,9 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, HttpResponse, get_object_or_404
 from books.models import Book
 
 import stripe
+
+#import settings so that we can access the public stripe key
 from django.conf import settings
 from django.contrib.sites.models import Site
 
@@ -26,12 +28,15 @@ def checkout(request):
         book = get_object_or_404(Book, pk=book_id)
 
         # create the line item
-        # name, amount, quanity, currency are fixed by stirpe
+        # name, amount, quanity, currency are fixed by stripe
+        # you see all the possible properties of a line item at:
+        # https://stripe.com/docs/api/invoices/line_item
+
         item = {
             "name": book_model.title,
             "amount": book_model.cost,
             "quantity": book['qty'],
-            "currency": 'usd'
+            "currency": 'usd',
         }
 
         line_items.append(item)
@@ -70,4 +75,4 @@ def checkout_cancelled(request):
 @csrf_exempt
 def payment_completed(request):
     print(request.body)
-    return HttpResponse()
+    return HttpResponse(status=200)

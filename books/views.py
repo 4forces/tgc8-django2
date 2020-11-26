@@ -83,16 +83,16 @@ def update_book(request, book_id):
             book_form.save()
             return redirect(reverse(index))
         else:
-            return render(request, 'books/update.template.html', {
+            return render(request, 'books/update_book.template.html', {
                 "form": book_form,
-                # 'book': book_being_updated
+                'book': book_being_updated
             })
     else:
         # if method != POST, create a form with the book details filled in
         book_form = BookForm(instance=book_being_updated)
         return render(request, 'books/update_book.template.html', {
             "form": book_form,
-            # 'book': book_being_updated
+            'book': book_being_updated
         })
 
 
