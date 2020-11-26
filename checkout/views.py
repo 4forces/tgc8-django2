@@ -3,17 +3,19 @@ from books.models import Book
 
 import stripe
 from django.conf import settings
-from django.contrib.sites.models import sites
+from django.contrib.sites.models import Site
 
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
+
+
 def checkout(request):
     # set the api keys for stripe to work
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
     # retrieve the shopping cart
-    cart = request.session.get('shopping-cart',{})
+    cart = request.session.get('shopping-cart', {})
 
     line_items = []
     all_book_ids = []
@@ -47,7 +49,7 @@ def checkout(request):
             "all_book_ids": ",".join(all_book_ids)
         },
         mode="payment",
-        success_url = domain + reverse('checkout_success'),
+        success_url=domain + reverse('checkout_success'),
         cancel_url=domain + reverse("checkout_cancelled")
     )
 
@@ -57,12 +59,13 @@ def checkout(request):
     })
 
 
-def checkout_success:
+def checkout_success(request):
     return HttpResponse('Payment completed successfully')
 
 
-def checkout_cancelled:
+def checkout_cancelled(request):
     return HttpResponse('Check out cancelled')
+
 
 @csrf_exempt
 def payment_completed(request):
