@@ -25,7 +25,7 @@ def checkout(request):
     for book_id, book in cart.items():
 
         # retrieve the book specified by book_id
-        book = get_object_or_404(Book, pk=book_id)
+        book_model = get_object_or_404(Book, pk=book_id)
 
         # create the line item
         # name, amount, quanity, currency are fixed by stripe
