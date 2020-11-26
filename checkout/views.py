@@ -22,9 +22,10 @@ def checkout(request):
     line_items = []
     all_book_ids = []
 
+    # go thru each item in the shopping cart
     for book_id, book in cart.items():
 
-        # retrieve the book specified by book_id
+        # retrieve the book specified by book_id from our list of books
         book_model = get_object_or_404(Book, pk=book_id)
 
         # create the line item
@@ -71,8 +72,13 @@ def checkout_success(request):
 def checkout_cancelled(request):
     return HttpResponse('Check out cancelled')
 
-
+# webhook
 @csrf_exempt
 def payment_completed(request):
+    #1. verify that the data is actually sent by stripe
+    endpoint_secret = settings.ENDPOINT_SECRET
+    #2. process the order
+
+    # (request.body) = data stripe sends us 
     print(request.body)
     return HttpResponse(status=200)
