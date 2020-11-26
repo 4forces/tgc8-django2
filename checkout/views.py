@@ -77,7 +77,26 @@ def checkout_cancelled(request):
 def payment_completed(request):
     #1. verify that the data is actually sent by stripe
     endpoint_secret = settings.ENDPOINT_SECRET
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        #Invalid payload
+        print("Invalid payload")
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # signature is invalid
+        print("Invalid signature")
+        return HttpResponse(status=400)
+    
     #2. process the order
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        handle_payment(session)
 
     # (request.body) = data stripe sends us 
     print(request.body)
