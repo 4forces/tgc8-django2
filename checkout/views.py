@@ -1,5 +1,6 @@
 from django.shortcuts import render, reverse, HttpResponse, get_object_or_404
 from books.models import Book
+from .models import Purchase
 
 import stripe
 import json
@@ -10,6 +11,8 @@ from django.contrib.sites.models import Site
 
 from django.views.decorators.csrf import csrf_exempt
 
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 
@@ -18,7 +21,7 @@ def checkout(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
     # retrieve the shopping cart
-    cart = request.session.get('shopping-cart', {})
+    cart = request.session.get('shopping_cart', {})
 
     line_items = []
     all_book_ids = []
@@ -59,7 +62,7 @@ def checkout(request):
             "all_book_ids": json.dumps(all_book_ids)
         },
         mode="payment",
-        success_url=domain + reverse('checkout_success'),
+        success_url=domain + reverse("checkout_success"),
         cancel_url=domain + reverse("checkout_cancelled")
     )
 
@@ -108,4 +111,20 @@ def payment_completed(request):
 
 
 def handle_payment(session):
-    print(session)
+    metadata = session['metadata']
+    user = get_object_or_404(User, pk=session['client_reference_id'])
+    all_book_ids = json.loads(metadata['all_book_ids'])
+    for order_item in all_book_ids:
+        book_model = get_object_or_404(Book, pk=order_item['book_id'])
+    # print(session)
+
+    # create the purchase model and save it manually
+    purchase = Purchase()
+    purchase.book = book_model
+    purchase.user = user
+    purchase.qty = order_item['qty']
+    purchase.price = book_model.cost
+
+    # remember to save the model
+    purchase.save()
+
