@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 
 
 class Purchase(models.Model):
-    book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     purchase_date = models.DateTimeField(auto_now_add=True)
     price = models.IntegerField(blank=False)
     qty = models.IntegerField(blank=False)
