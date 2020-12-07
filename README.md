@@ -193,3 +193,39 @@ add
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 CRISPY_TEMPLATE_PACK = 'bootstrap4' 
 ```
+
+# Dependencies to Install (when opening first time in gitpod)
+```
+# Install django first
+pip3 install django
+
+
+# For User authorisation
+pip3 install django-allauth
+
+
+# Crispy forms
+pip3 install django-crispy-forms
+
+
+# Cloudinary (Image Upload)
+pip3 install cloudinary
+pip3 install python-dotenv
+
+
+# Stripe
+pip3 install stripe
+
+
+# For Heroku
+pip3 install gunicorn
+pip3 install psycopg2
+pip3 install Pillow
+pip3 install whitenoise 
+pip3 install dj_database_url
+
+
+# Savings to requirements.txt for Heroku
+pip3 freeze --local > requirements.txt
+
+```
