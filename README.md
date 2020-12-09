@@ -1,6 +1,26 @@
-## 0. Install new app | Lecturer's Notes: Step 2.1
+
+## 0.1 Summary of Django App and Model Creation
+1. Create app via `django-admin startapp <app_name>`
+2. Create template and `template/app` folders in app
+3. Create function in `app/view.py` to render the template
+4. Create models in `app/models.py`
+5. Make migrations and migrate
+6. Register the created model in `app/admin.py` to be able to view in django admin
+
+### Notes on "Adding a non-nullable field" Error
+#### Lecturer's comments
+1. If the field is `IntegerField` use `0`
+2. If the field is a string (`CharField`, `TextField`) use `None`
+3. If the field is ?? use `??`
+
+#### More from [Django Documentation](https://docs.djangoproject.com/en/3.0/ref/models/fields/#default) on "Null"
+1. Avoid using `null` on string-based fields such as `CharField` and `TextField` as this creates 2 possible values for "no data". Use empty string `""` instead.
+2. Default is `Null=False`. If `Null=True`, Django will store empty values as NULL in the database
+
+## 0.2 Install new app | Lecturer's Notes: Step 2.1
 1. install django: `django-admin startapp books`
 2. create superuser:  `python3 manage.py create superuser`
+
 
 ## 1. Create a view function | Lecturer's Notes: Steps 2.3
 
