@@ -64,6 +64,7 @@ def index(request):
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
+More on how to rest migrations [here](https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html)
 - Note 1: To preview migrations to be made: `python3 manage.py makemigrations -–dry-run`
 - Note 2: To view all migrated/to be migrated: `python3 manage.py showmigrations`
 - Note 3: To view verbose: `python3 manage.py migrate --plan`
