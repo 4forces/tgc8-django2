@@ -190,3 +190,14 @@ class BookForm(forms.ModelForm):
         fields = ('title', 'desc', 'ISBN', 'genre', 'tag')
 ```
 ---
+
+# Running this project in Gitpod for the first time
+
+In the terminal, type the following:
+1. `pip3 install django`
+2. `pip3 install django-allauth`
+3. `pip3 install django-crispy-forms`
+4. `pip3 install python-dotenv`
+5. `pip3 install cloudinary`
+6. `pip3 install stripe`
+7. `python3 manage.py migrate`
