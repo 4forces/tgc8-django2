@@ -5,7 +5,7 @@ from .models import Purchase
 import stripe
 import json
 
-#import settings so that we can access the public stripe key
+# import settings so that we can access the public stripe key
 from django.conf import settings
 from django.contrib.sites.models import Site
 
