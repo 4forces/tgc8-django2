@@ -6,20 +6,23 @@
 
 {% block content %}
     <h1>Create Books Form</h1>
-    <form method="POST" id='form'>
-    {% csrf_token %}
-    {{ form|crispy}}
-    <input type="Submit"/>
-    </form>
+        <div id="form">
+            <form method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                {{form|crispy}}
+                <input type="submit"/>
+            </form>
+        </div>
 
-    <div class="status">
-        <h2>Status</h2>
-        <span class="status_value">Idle</span>
-    </div>
+        <div class="status">
+            <h2>Status</h2>
+            <span class="status_value">Idle</span>
+        </div>
 
-    <div class="uploaded_info_folder">
-    
-    </div>
+        <div class="uploaded_info_holder">
+        
+        </div>
+
 
 {%endblock%}
 
@@ -64,7 +67,7 @@
                 )          
             
             ) //end append
-            $('.uploaded_info_folder').append(info);
+            $('.uploaded_info_holder').append(info);
             $('#form input[type="file"]').remove();
         });
 
