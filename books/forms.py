@@ -10,7 +10,7 @@ class BookForm(forms.ModelForm):
         # define model as 'Book'
         model = Book
         fields = ('title', 'desc', 'ISBN', 'genre',
-                  'category', 'tag', 'author', 'owner', 'cost')
+                  'category', 'tag', 'author', 'owner', 'cost', 'cover')
     cover = CloudinaryJsFileField()
 
 
