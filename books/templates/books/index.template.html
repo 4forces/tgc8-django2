@@ -1,5 +1,6 @@
 {% extends 'base.template.html' %}
 {% load static %}
+{% load mathfilters %}
 
 {% block content %}
         <h1>Books</h1>
@@ -14,7 +15,8 @@
         <ul>
             {%for b in books %}
             <li>
-                {{b.title}} 
+                Title: {{b.title}} 
+                Cost: $ {{ b.cost|div:100|floatformat:2 }}
                 <a href="{% url 'update_books_route' book_id=b.id %}">Edit</a>
                 <a href="{% url 'delete_books_route' book_id=b.id %}">Delete</a>
                 <a href="{% url 'add_to_cart' book_id=b.id %}" class="btn btn-primary btn-sm">Add to Cart</a>
